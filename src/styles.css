@@ -1,0 +1,89 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+#body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(/public/bg.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  
+}
+.wrapper{
+ 
+  background: transparent;
+  border: 2px solid #e62e2d;
+  backdrop-filter: blur(9px); 
+  color: #e62e2d;
+  border-radius: 12px;
+  padding: 30px 40px;
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    width: 100vw;
+  }
+}
+.input-box input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid #e62e2d;
+  border-radius: 40px;
+  font-size: 16px;
+  
+  padding: 20px 45px 20px 20px;
+}
+.input-box input::placeholder{
+  color: #e62e2d;
+}
+.input-box i{
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translate(-50%);
+  font-size: 20px;
+  color: #e62e2d;
+
+}
+.wrapper .remember-forgot{
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+}
+.remember-forgot label input{
+  accent-color: #e62e2d;
+  margin-right: 3px;
+
+}
+.remember-forgot a{
+  color: #e62e2d;
+  text-decoration: none;
+
+}
+.remember-forgot a:hover{
+  text-decoration: underline;
+}
+.wrapper .btn{
+  width: 100%;
+  height: 45px;
+  background-color: #e62e2d;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: whitesmoke;
+  font-weight: 600;
+}
+
