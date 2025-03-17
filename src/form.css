@@ -1,0 +1,56 @@
+/* شريط التقدم */
+.progress-step {
+    flex-grow: 1;
+    height: 8px;
+    margin: 0 5px;
+    background: #ccc;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+  }
+  .form-control {
+    border: 1px solid #d1d5db; /* Equivalent to border-gray-300 */
+    border-radius: 6px; /* Equivalent to rounded-md */
+    padding: 8px 16px; /* Equivalent to px-4 py-2 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Equivalent to shadow-sm */
+    transition: all 0.2s ease-in-out; /* Equivalent to transition-all duration-200 */
+  }
+  
+  /* Focus Styles */
+  .form-control:focus {
+    border-color: #e62e2d; /* Equivalent to focus:border-blue-500 */
+    outline: none;
+    box-shadow: 0 0 8px #e62e2d; /* Equivalent to focus:ring focus:ring-blue-300 focus:ring-opacity-50 */
+  }
+  
+  .btnSuivant{
+    background-color: #e62e2d;
+  }
+  .btn-secondary {
+    border-radius: 0.375rem;
+  }
+  .progress-step.active {
+    background: #e62e2d
+  }
+  
+  /* تأثير الانتقال بين البطاقات */
+  .step-card {
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: fadeInSlide 0.5s forwards;
+  }
+  
+  @keyframes fadeInSlide {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .alert-success {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+  }

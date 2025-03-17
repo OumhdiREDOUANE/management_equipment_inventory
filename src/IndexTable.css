@@ -1,0 +1,64 @@
+/* Flou d'arrière-plan */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px); /* Flou d'arrière-plan */
+  z-index: 9999;
+}
+
+/* Animation de la carte */
+.animate-card {
+  width: 60%;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Animation de l'apparition */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#cardFilterEtat{
+  position: absolute;
+top: 65px;
+left: 65vw;
+ 
+
+}
+.sort,.filter,.close{
+  background-image: url(/public/icons8-sort-100.png);
+  cursor: pointer;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  display: flex;
+}
+.filter{
+background-image: url(/public/filter.png);
+}
+.close{
+background-image: url(/public/close.svg);
+
+
+}
+/* .play_active{
+  background-image: url(/public/icons8-sort-100.png);
+  cursor: pointer;
+  background-size: cover;
+
+width: 25px;
+height: 25px;
+} */
