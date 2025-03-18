@@ -96,18 +96,7 @@ useEffect(()=>{
     <div className='relative '>
       <div className='flex '>
     <SearchBar list ={list}/>
-      <div className='mx-2 '>
-        <button className="btn btn-success w-[fit-content] " onClick={()=>setFileType(!fileType)}><img src="/downloads.png" className='w-[20px] h-[20px]'/></button>
-       
-      {fileType &&
-      <div className="card flex absolute z-2">
-  <button className="btn btn-success w-[fit-content]  " onClick={downloadCSV}><img src="/csv-file-format-extension.png" className='w-[17px] h-[17px]'/></button>
-        <button className="btn btn-danger w-[fit-content]" onClick={downloadPDF}><img src="/download-pdf.png" className='w-[17px] h-[17px]'/></button> 
-      </div>
-  
-  
-}
-</div>
+     
       </div>
       <div className='flex justify-center'>
      

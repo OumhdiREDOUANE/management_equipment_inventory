@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBar from './NavBar'
 import MultiStepForm from './Form'
+
 export default function Add_Inventory() {
   return (
     <>

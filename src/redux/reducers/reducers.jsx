@@ -93,29 +93,38 @@ console.log("2")
           return { ...state, filterData: filterData(state.tableData) };
         
         
-    case 'pagination':
-      console.log(state.filterData)
-
-      return {
-        ...state,paginatedData:state.filterData.slice((action.payload - 1)*5,action.payload * 5)
-      }
-    case "sort":
-      console.log("9")
-
-      const key = action.payload
-        let direction = "asc";
-        if (state.sortConfig.key === key && state.sortConfig.direction === "asc") {
-          direction = "desc";
-        }
-        
-        const sortedData = [...state.paginatedData].sort((a, b) => {
-          const valA = a[key] ?? "";
-          const valB = b[key] ?? "";
-          return direction === "asc"
-            ? valA.toString().localeCompare(valB.toString(), undefined, { numeric: true })
-            : valB.toString().localeCompare(valA.toString(), undefined, { numeric: true });
-        });
-        return {...state,sortConfig:{key,direction},paginatedData:sortedData}
+          case "pagination":
+            console.log(state.filterData);
+          
+            return {
+              ...state,
+              paginatedData: state.filterData.slice((action.payload - 1) * 5, action.payload * 5),
+            };
+            case "sort":
+              console.log("Sorting triggered");
+            
+              const key = action.payload;
+              let direction = "asc";
+            
+              if (state.sortConfig?.key === key) {
+                direction = state.sortConfig.direction === "asc" ? "desc" : "asc";
+              }
+            
+              const sortedData = [...state.filterData].sort((a, b) => {
+                const valA = a[key] ?? "";
+                const valB = b[key] ?? "";
+                return direction === "asc"
+                  ? valA.toString().localeCompare(valB.toString(), undefined, { numeric: true })
+                  : valB.toString().localeCompare(valA.toString(), undefined, { numeric: true });
+              });
+            
+              return {
+                ...state,
+                sortConfig: { key, direction },
+                filterData: sortedData, // Store sorted data in filterData
+                paginatedData: sortedData.slice(0, 5), // Reset pagination to first page
+              };
+            
     case "setTypeFilter":
       console.log("10")
 
@@ -155,7 +164,9 @@ return {...state,SelectedRows:[]}
           return {...state,SelectedRows:[...state.SelectedRows,action.payload]}
         }
          
-        
+       case "defaultSelectedRows":
+         return {...state,SelectedRows:[]}
+       
     default:
       return state;
   }

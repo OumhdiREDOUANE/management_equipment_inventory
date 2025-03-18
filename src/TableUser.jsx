@@ -38,7 +38,10 @@ const fetchData = async (dispatch) => {
           payload: error.message,
         });
       }
-      }
+      }  
+      useEffect(()=>{
+          dispatch({type:"defaultSelectedRows"})
+         },[filterData])
 
 
 useEffect(() => {

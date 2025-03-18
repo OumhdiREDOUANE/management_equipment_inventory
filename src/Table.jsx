@@ -5,23 +5,44 @@ import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from "./re
 import axios from "axios"
 import {Link} from "react-router"
 
-
-
 export default function Table({setSelectedRow}) {
+  const [file, setFile] = useState(null);
+
   const { loading, filterData, error ,tableData,isHistory} = useSelector((state) => state);
   const paginatedData = useSelector(state => state.paginatedData)
   
   const dispatch = useDispatch()
+  
+  const  visibleColumns = useSelector(state=>state.visibleColumns)
+  const SelectedRows = useSelector(state=>state.SelectedRows)
+  
+  console.log(SelectedRows)
+  
+   useEffect(()=>{
+    dispatch({type:"defaultSelectedRows"})
+   },[filterData])
+   const deletAllSelectHistory =()=>{
+    axios.delete("http://localhost/php_inventaire/controller/contoller2.php",{params: {id:SelectedRows}}).then((response) => {
 
-const  visibleColumns = useSelector(state=>state.visibleColumns)
-const SelectedRows = useSelector(state=>state.SelectedRows)
+      console.log(response.data);
+          fetchData(dispatch)
+   })
+   }
+   const deletAllSelectList =()=>{
+    axios.delete("http://localhost/php_inventaire/controller/controller.php",{params: {id:SelectedRows}}).then((response) => {
 
-  console.log(isHistory)
-const recovery = async (item) => {
+      console.log(response.data);
+          fetchData(dispatch)
+   })
+   }
+  const recovery = async (item) => {
   
 
-    console.log(item)
-      const response = await axios.post("http://localhost/php_inventaire/controller/contoller2.php",item);
+   
+      const response = await axios.post("http://localhost/php_inventaire/controller/contoller2.php",item,{
+        params: { statut: "not export" }
+      });
+      console.log(response.data)
       fetchData(dispatch)
     
     }
@@ -97,11 +118,14 @@ const deletRowHistory =(idRowDelete)=>{
 // },[JSON.stringify(tableData)])
 
 
-
-  const handlClickSort = (key) => {
+ const handlClickSort = (key) => {
 
     dispatch({ type: 'sort', payload: key })
   }
+useEffect(()=>{
+  handlClickSort("inventaire")
+},[])
+ 
   const handlClickSetTypeFilter = (typeFilte) => {
     dispatch({ type: 'setTypeFilter', payload: typeFilte })
 
@@ -116,10 +140,12 @@ dispatch({type:"setVisibleColumns",payload:column})
     dispatch({type:"toggleRowSelection",payload:id})
   };
   return (
-        <>{SelectedRows.length > 0 && <div className="flex md:w-[90%] items-center ">
+        <>
+        {SelectedRows.length > 0 && <div className="flex md:w-[90%] items-center ">
           <div className="alert alert-info col h-[25px] flex items-center justify-center">
           {`${SelectedRows.length} ligne(s) sélectionnée(s)`}
-        </div>
+         
+          </div>
         </div>}
         <div className='relative'>
 
@@ -216,21 +242,76 @@ dispatch({type:"setVisibleColumns",payload:column})
                     {item.Quantité !== null ? item.Quantité : "N/A"}
                   </div>
                 </td>}
-                {visibleColumns.Affectation&&<td>{item.Affectation}</td>}
-                {visibleColumns.Réaffectation&&<td>{item.Réaffectation}</td>}
+                {visibleColumns.Affectation&&<td><div className='truncated-text'>{item.Affectation}</div></td>}
+                {visibleColumns.Réaffectation&&<td><div className='truncated-text'>{item.Réaffectation}</div></td>}
                 {visibleColumns.État&&<td>{item.État}</td>}
                 {visibleColumns.Emplacement&&<td>{item.Emplacement}</td>}
-                {visibleColumns.Responsable&&<td>{item.Responsable}</td>}
-                <td className='flex  max-lg:w-[200px]'>
-                {isHistory=="list"?<><Link className=' ' to={`/Edit/${item.id}/${item.inventaire}`}> <button className="btn btn-primary btn-sm mx-1 w-[50px] h-[50px] "><img src="/edit.png" className=' w-[30px] h-[25px]' /></button> </Link>
-                <Link to ="/List_inventory/List_inventory">  <button className="btn btn-danger btn-sm mx-1 w-[50px] h-[50px] "onClick={()=>deletRowList(item.id)}><img src="/bin.png" className='w-[25px] h-[25px]' /></button></Link>
-                </>
-                :<><button className="btn btn-primary btn-sm mx-1 w-[90px] h-[50px]" 
-                onClick={()=>recovery(item)}
-                ><img src="/icons8-recovery-64.png" className=' w-[50px] h-[40px]' /></button>
-                <Link to ="/history/history">  <button className="btn btn-danger btn-sm mx-1 w-[50px] h-[50px] "onClick={()=>deletRowHistory(item.id)}><img src="/bin.png" className='w-[25px] h-[25px]' /></button></Link></>}
-                  <button className="btn btn-info btn-sm mx-1"onClick={() => setSelectedRow(item)} ><img src="/search-file.png" className='w-[25px] h-[25px]' /></button>
-                </td>
+                {visibleColumns.Responsable&&<td><div className='truncated-text'>{item.Responsable}</div></td>}
+                <td className="flex items-center space-x-2 w-auto">
+  {isHistory === "list" ? (
+    <>
+      {/* Edit Button */}
+      <Link to={`/Edit/${item.id}/${item.inventaire}`}>
+        <button className="btn btn-primary btn-sm w-[45px] h-[45px] flex items-center justify-center">
+          <img src="/edit.png" className="w-[22px] h-[22px]" alt="Edit" />
+        </button>
+      </Link>
+
+      <Link to="/List_inventory/List_inventory">
+      {SelectedRows.length > 0?<button
+          className="btn btn-danger btn-sm w-[50px] h-[50px] flex items-center justify-center"
+          onClick={() => deletAllSelectList()}
+        >
+          <img src="/bin.png" className="w-[20px] h-[20px]" alt="Delete" />
+        </button>:<button
+          className="btn btn-danger btn-sm w-[50px] h-[50px] flex items-center justify-center"
+          onClick={() => deletRowList(item.id)}
+        >
+          <img src="/bin.png" className="w-[20px] h-[20px]" alt="Delete" />
+        </button>}
+        
+      </Link>
+    </>
+  ) : (
+    <>
+      {/* Recovery Button */}
+      <button
+        className="btn btn-primary btn-sm w-[80px] h-[45px] flex items-center justify-center"
+        onClick={()=>recovery(item)}
+      >
+        <img
+          src="/icons8-recovery-64.png"
+          className="w-[40px] h-[30px]"
+          alt="Recovery"
+        />
+      </button>
+
+      {/* Delete Button for History */}
+      <Link to="/history/history">
+       {SelectedRows.length > 0?<button
+          className="btn btn-danger btn-sm w-[50px] h-[50px] flex items-center justify-center"
+          onClick={() => deletAllSelectHistory()}
+        >
+          <img src="/bin.png" className="w-[20px] h-[20px]" alt="Delete" />
+        </button>:<button
+          className="btn btn-danger btn-sm w-[50px] h-[50px] flex items-center justify-center"
+          onClick={() => deletRowHistory(item.id)}
+        >
+          <img src="/bin.png" className="w-[20px] h-[20px]" alt="Delete" />
+        </button>}
+      </Link>
+    </>
+  )}
+
+  {/* View Details Button */}
+  <button
+    className="btn btn-info btn-sm w-[50px] h-[45px] flex items-center justify-center"
+    onClick={() => setSelectedRow(item)}
+  >
+    <img src="/search-file.png" className="w-[22px] h-[22px]" alt="View" />
+  </button>
+</td>
+
               </tr>
             )
           ) : (

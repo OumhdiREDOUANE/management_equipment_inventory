@@ -30,7 +30,15 @@
     transform: translateY(0);
   }
 }
-
+.truncated-text{
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Limit to 1 line */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 30px; /* Adjust the height as needed */
+  line-height: 1.5em; /* Adjust line height for text */
+}
 #cardFilterEtat{
   position: absolute;
 top: 65px;
