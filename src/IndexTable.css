@@ -1,0 +1,164 @@
+/* ============================================
+   OVERLAY ET MODAL / OVERLAY AND MODAL
+   ============================================ */
+
+/* Flou d'arrière-plan modal / Modal background blur */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+}
+
+/* ============================================
+   ANIMATIONS / ANIMATIONS
+   ============================================ */
+
+/* Animation de la carte modale / Modal card animation */
+.animate-card {
+  width: 60%;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Keyframes pour l'animation d'apparition / Keyframes for fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   TEXTE ET CONTENU / TEXT AND CONTENT
+   ============================================ */
+
+/* Texte tronqué avec ellipsis / Truncated text with ellipsis */
+.truncated-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 30px;
+  line-height: 1.5em;
+}
+
+/* ============================================
+   FILTRES ET CONTRÔLES / FILTERS AND CONTROLS
+   ============================================ */
+
+/* Positionnement du filtre d'état / State filter positioning */
+#cardFilterEtat {
+  position: absolute;
+  top: 65px;
+  left: 65vw;
+}
+
+/* ============================================
+   ICÔNES / ICONS
+   ============================================ */
+
+/* Styles communs pour les icônes / Common styles for icons */
+.sort,
+.filter,
+.close {
+  cursor: pointer;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  display: flex;
+}
+
+/* Icône de tri / Sort icon */
+.sort {
+  background-image: url(/public/icons8-sort-100.png);
+}
+
+/* Icône de filtre / Filter icon */
+.filter {
+  background-image: url(/public/filter.png);
+}
+
+/* Icône de fermeture / Close icon */
+.close {
+  background-image: url(/public/close.svg);
+}
+
+/* ============================================
+   MEDIA QUERIES / RESPONSIVE DESIGN
+   ============================================ */
+
+/* Adaptations pour les écrans mobiles / Mobile screen adaptations */
+@media screen and (max-width: 768px) {
+  .animate-card {
+    width: 90%;
+  }
+
+  #cardFilterEtat {
+    left: 50vw;
+    transform: translateX(-50%);
+  }
+}
+
+/* Adaptations pour les grands écrans / Large screen adaptations */
+@media screen and (min-width: 1200px) {
+  .truncated-text {
+    max-height: 40px;
+  }
+}
+
+/* ============================================
+   ÉTATS INTERACTIFS / INTERACTIVE STATES
+   ============================================ */
+
+/* Effets de survol pour les icônes / Hover effects for icons */
+.sort:hover,
+.filter:hover,
+.close:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+
+/* États actifs des contrôles / Active states for controls */
+.sort:active,
+.filter:active,
+.close:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   ACCESSIBILITÉ / ACCESSIBILITY
+   ============================================ */
+
+/* Focus visible pour l'accessibilité / Visible focus for accessibility */
+.sort:focus,
+.filter:focus,
+.close:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Support pour la réduction de mouvement / Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-card {
+    animation: none;
+  }
+  
+  .sort:hover,
+  .filter:hover,
+  .close:hover {
+    transform: none;
+  }
+}

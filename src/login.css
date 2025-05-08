@@ -1,0 +1,193 @@
+/* ============================================
+   RÉINITIALISATION / RESET
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ============================================
+   MISE EN PAGE PRINCIPALE / MAIN LAYOUT
+   ============================================ */
+#body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(/public/bg.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+/* ============================================
+   CONTENEUR DE CONNEXION / LOGIN CONTAINER
+   ============================================ */
+.wrapper {
+  background: transparent;
+  border: 2px solid var(--primary-color, #e62e2d);
+  backdrop-filter: blur(9px);
+  color: var(--primary-color, #e62e2d);
+  border-radius: 12px;
+  padding: 30px 40px;
+  width: 400px; /* Largeur fixe par défaut / Default fixed width */
+}
+
+/* ============================================
+   CHAMPS DE SAISIE / INPUT FIELDS
+   ============================================ */
+.input-box {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  border: 2px solid var(--primary-color, #e62e2d);
+  border-radius: 40px;
+  font-size: 16px;
+  padding: 20px 45px 20px 20px;
+  color: var(--primary-color, #e62e2d);
+  transition: border-color 0.3s ease;
+}
+
+.input-box input::placeholder {
+  color: var(--primary-color, #e62e2d);
+  opacity: 0.7;
+}
+
+.input-box input:focus {
+  border-color: var(--primary-color-dark, #c41f1e);
+  outline: none;
+}
+
+/* Icônes des champs / Field icons */
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--primary-color, #e62e2d);
+  pointer-events: none;
+}
+
+/* ============================================
+   SECTION SE SOUVENIR/MOT DE PASSE OUBLIÉ
+   REMEMBER/FORGOT PASSWORD SECTION
+   ============================================ */
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14.5px;
+  margin: 15px 0;
+}
+
+/* Case à cocher personnalisée / Custom checkbox */
+.remember-forgot label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.remember-forgot label input {
+  accent-color: var(--primary-color, #e62e2d);
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* Lien "Mot de passe oublié" / "Forgot password" link */
+.remember-forgot a {
+  color: var(--primary-color, #e62e2d);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.remember-forgot a:hover {
+  color: var(--primary-color-dark, #c41f1e);
+  text-decoration: underline;
+}
+
+/* ============================================
+   BOUTON DE CONNEXION / LOGIN BUTTON
+   ============================================ */
+.btn {
+  
+  height: 45px;
+  background-color: var(--primary-color, #e62e2d);
+  border: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: whitesmoke;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--primary-color-dark, #c41f1e);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* ============================================
+   MEDIA QUERIES / RESPONSIVE DESIGN
+   ============================================ */
+@media screen and (max-width: 600px) {
+  .wrapper {
+    width: 90%;
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .remember-forgot {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITÉ / ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Focus visible pour l'accessibilité / Visible focus for accessibility */
+input:focus,
+button:focus,
+a:focus {
+  outline: 2px solid var(--primary-color, #e62e2d);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ANIMATIONS / ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapper {
+  animation: fadeIn 0.5s ease-out;
+}
+
+

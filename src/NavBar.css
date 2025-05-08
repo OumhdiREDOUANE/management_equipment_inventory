@@ -1,0 +1,201 @@
+/* ============================================
+   CONFIGURATION GLOBALE / GLOBAL SETUP
+   ============================================ */
+body {
+    min-height: 100vh;
+    background: url(/public/bg.jpg) no-repeat center center;
+    background-size: cover;
+    backdrop-filter: blur(4px);
+}
+
+/* ============================================
+   BOUTONS / BUTTONS
+   ============================================ */
+button {
+    width: 100%;
+    height: 45px;
+    background-color: var(--primary-color, #eb6206);
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: whitesmoke;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--primary-color-dark, #d55805);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN MOBILE
+   ============================================ */
+@media screen and (max-width: 767px) {
+    /* Navigation ouverte / Open Navigation */
+    .navOpen {
+        height: fit-content;
+        padding-bottom: 12px;
+        transition: background-color 0.3s ease-in;
+    }
+
+    /* Bouton du menu / Menu Button */
+    .button {
+        position: relative;
+        width: 15vw;
+        height: 15vw;
+        display: flex;
+        top: 35px;
+        cursor: pointer;
+    }
+
+    /* Icône du menu / Menu Icon */
+    #icon {
+        position: absolute;
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+    }
+
+    /* ============================================
+       ICÔNE DU MENU HAMBURGER / HAMBURGER MENU ICON
+       ============================================ */
+    .lines,
+    .lines:before,
+    .lines:after {
+        position: absolute;
+        display: block;
+        width: 100%;
+        left: 0;
+        background: #FFFFFF;
+        transition: 0.7s;
+        height: 3px;
+    }
+
+    .lines {
+        margin-top: -2px;
+        top: 50%;
+    }
+
+    .lines:before,
+    .lines:after {
+        content: '';
+        height: 100%;
+        transform-origin: 5rem center;
+    }
+
+    .lines:before {
+        top: 8px;
+    }
+
+    .lines:after {
+        top: -8px;
+    }
+
+    /* ============================================
+       ICÔNE DE FERMETURE / CLOSE ICON
+       ============================================ */
+    .Close {
+        transform: scale3d(0.8, 0.8, 0.8);
+        position: relative;
+        width: 15vw;
+        height: 15vw;
+        display: flex;
+        top: 23px;
+        cursor: pointer;
+    }
+
+    .Close .lines {
+        background: transparent;
+        width: 9vw;
+    }
+
+    .Close .lines:before,
+    .Close .lines:after {
+        top: 0;
+        transform-origin: 50% 50%;
+    }
+
+    .Close .lines:before {
+        transform: rotate3d(0, 0, 1, 45deg);
+    }
+
+    .Close .lines:after {
+        transform: rotate3d(0, 0, 1, -45deg);
+    }
+
+    /* ============================================
+       LISTE DE NAVIGATION / NAVIGATION LIST
+       ============================================ */
+    .ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .ul li {
+        padding: 15px 0 10px;
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .ul li:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITÉ / ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Focus visible / Visible focus */
+button:focus-visible,
+.button:focus-visible {
+    outline: 2px solid var(--focus-color, #4A90E2);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   VARIABLES CSS / CSS VARIABLES
+   ============================================ */
+:root {
+    --primary-color: #eb6206;
+    --primary-color-dark: #d55805;
+    --focus-color: #4A90E2;
+    --text-color: #FFFFFF;
+    --border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   ANIMATIONS / ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navOpen {
+    animation: fadeIn 0.3s ease-out;
+}
